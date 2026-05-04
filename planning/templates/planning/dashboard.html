@@ -1,0 +1,144 @@
+<!-- templates/planning/dashboard.html -->
+{% extends 'base.html' %}
+
+{% block title %}Tableau de Bord - Gestion Planning{% endblock %}
+
+{% block content %}
+<!-- Message de bienvenue -->
+<div class="welcome-message mb-4">
+    {% if user.is_authenticated %}
+        <div class="alert alert-info">
+            <h4><i class="fas fa-user"></i> Bienvenue, {{ user.username }} !</h4>
+            <p>Voici votre tableau de bord de planning personnalisé</p>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            <h4><i class="fas fa-exclamation-triangle"></i> Bienvenue, Invité !</h4>
+            <p>Connectez-vous pour accéder à toutes les fonctionnalités</p>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Statistiques rapides -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card stat-card text-white">
+            <div class="card-body text-center">
+                <h2 class="card-title">24</h2>
+                <p class="card-text">Événements ce mois</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card text-white">
+            <div class="card-body text-center">
+                <h2 class="card-title">8</h2>
+                <p class="card-text">Tâches en cours</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card text-white">
+            <div class="card-body text-center">
+                <h2 class="card-title">3</h2>
+                <p class="card-text">Réunions aujourd'hui</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card text-white">
+            <div class="card-body text-center">
+                <h2 class="card-title">95%</h2>
+                <p class="card-text">Taux de completion</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Grille du tableau de bord -->
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-sitemap"></i> Filières</h5>
+                <p class="card-text">Gérez les filières de formation et leurs spécialisations.</p>
+                <a href="{% url 'filiere_list' %}" class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-eye"></i> Voir les Filières
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-users"></i> Classes</h5>
+                <p class="card-text">Organisez vos classes et gérez les groupes d'étudiants.</p>
+                <a href="{% url 'classe_list' %}" class="btn" class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-eye"></i> Voir les Classes
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-book"></i> Cours</h5>
+                <p class="card-text">Planifiez et organisez vos cours et matières.</p>
+                <a href="{% url 'cours_list' %}" class="btn" class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-eye"></i> Voir les Cours
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-door-open"></i> Salles</h5>
+                <p class="card-text">Gérez vos salles de classe et leurs disponibilités.</p>
+                <a href="{% url 'salle_list' %}" class=" btn"class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-eye"></i> Voir les Salles
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-calendar-alt"></i> Planning</h5>
+                <p class="card-text">Consultez et modifiez vos plannings de cours.</p>
+                <a href="{% url 'planning_list' %}" class="btn"class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-eye"></i> Voir le Planning
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-calendar"></i> Calendrier</h5>
+                <p class="card-text">Vue calendrier complète de tous vos événements.</p>
+                <a href="{% url 'planning_calendar' %}" class="btn" class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-calendar"></i> Voir le Calendrier
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Affichage des données de contexte si disponibles -->
+{% if debug_info %}
+    <div class="card mt-4">
+        <div class="card-header bg-info text-white">
+            <h5><i class="fas fa-info-circle"></i> Informations de Debug</h5>
+        </div>
+        <div class="card-body">
+            <pre>{{ debug_info }}</pre>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

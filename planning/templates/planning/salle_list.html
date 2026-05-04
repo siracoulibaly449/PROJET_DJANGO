@@ -1,0 +1,56 @@
+<!-- templates/planning/salle_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Salles - Gestion Planning{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-door-open"></i> Salles</h1>
+    <a href="{% url 'salle_create' %}" class="btn" class="btn" style="background: purple; color: white;">
+        <i class="fas fa-plus"></i> Nouvelle salle
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if salles %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Code</th>
+                            <th>Capacité</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for salle in salles %}
+                            <tr>
+                                <td>{{ salle.nom }}</td>
+                                <td><span class="badge bg-secondary">{{ salle.code }}</span></td>
+                                <td>{{ salle.capacite }}</td>
+                                <td>{{ salle.description|truncatewords:10 }}</td>
+                                <td>
+                                    <a href="{% url 'salle_update' salle.pk %}" class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit"></i>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Aucune salle trouvée</h4>
+                <p class="text-muted">Commencez par créer votre première salle.</p>
+                <a href="{% url 'salle_create' %}" class="btn" class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-plus"></i> Créer une salle
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

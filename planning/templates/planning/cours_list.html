@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Cours - Gestion Planning{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-book"></i> Cours</h1>
+    <a href="{% url 'cours_create' %}" class="btn" class="btn" style="background: purple; color: white;">
+        <i class="fas fa-plus"></i> Nouveau cours
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if cours_list %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Code</th>
+                            <th>Filière</th>
+                            <th>Professeur</th>
+                            <th>Heures</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cours in cours_list %}
+                            <tr>
+                                <td>{{ cours.nom }}</td>
+                                <td><span class="badge bg-secondary">{{ cours.code }}</span></td>
+                                <td>{{ cours.filiere.nom }}</td>
+                                <td>{{ cours.professeur.nom }}</td>
+                                <td>{{ cours.heures_total }}</td>
+                                <td>
+                                    <a href="{% url 'cours_update' cours.pk %}" class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Aucun cours trouvé</h4>
+                <p class="text-muted">Commencez par créer votre premier cours.</p>
+                <a href="{% url 'cours_create' %}" class="btn" class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-plus"></i> Créer un cours
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

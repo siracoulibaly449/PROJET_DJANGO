@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestion Planning Cours{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+ <style>
+        .sidebar {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            transition: all 0.3s;
+        }
+        .nav-link:hover {
+            color: white !important;
+            background-color: rgba(255,255,255,0.1);
+        }
+        .nav-link.active {
+            background-color: rgba(255,255,255,0.2);
+            color: white !important;
+        }
+        .main-content {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            transition: all 0.15s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        }
+        .dashboard-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .dashboard-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+    </style>
+    </head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 col-lg-2 sidebar p-0">
+                <div class="p-3">
+                    <h4><i class="fas fa-graduation-cap"></i> Planning Cours</h4>
+                </div>
+                <nav class="nav flex-column">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
+                        <i class="fas fa-tachometer-alt"></i> Tableau de bord
+                    </a>
+                    <a class="nav-link {% if 'filiere' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'filiere_list' %}">
+                        <i class="fas fa-sitemap"></i> Filières
+                    </a>
+                    <a class="nav-link {% if 'classe' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'classe_list' %}">
+                        <i class="fas fa-users"></i> Classes
+                    </a>
+                    <a class="nav-link {% if 'cours' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'cours_list' %}">
+                        <i class="fas fa-book"></i> Cours
+                    </a>
+                    <a class="nav-link {% if 'salle' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'salle_list' %}">
+                        <i class="fas fa-door-open"></i> Salles
+                    </a>
+                    <a class="nav-link {% if 'planning' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'planning_list' %}">
+                        <i class="fas fa-calendar-alt"></i> Planning
+                    </a>
+                </nav>
+            </div>
+            
+            <!-- Main content -->
+            <div class="col-md-9 col-lg-10 main-content p-0">
+                <div class="p-4">
+                    <!-- Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
+
+

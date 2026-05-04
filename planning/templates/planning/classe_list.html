@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Classes - Gestion Planning{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-school"></i> Classes</h1>
+    <a href="{% url 'classe_create' %}" class="btn" class="btn" style="background: purple; color: white;">
+        <i class="fas fa-plus"></i> Nouvelle classe
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        {% if classes %}
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Filière</th>
+                            <th>Niveau</th>
+                            <th>Nombre d'étudiants</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for classe in classes %}
+                            <tr>
+                                <td>{{ classe.nom }}</td>
+                                <td>{{ classe.filiere.nom }}</td>
+                                <td>{{ classe.niveau }}</td>
+                                <td>{{ classe.nombre_etudiants }}</td>
+                                <td>
+                                    <a href="{% url 'classe_update' classe.pk %}" class="btn btn-sm btn-outline-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Aucune classe trouvée</h4>
+                <p class="text-muted">Commencez par créer votre première classe.</p>
+                <a href="{% url 'classe_create' %}" class="btn" class="btn" style="background: purple; color: white;">
+                    <i class="fas fa-plus"></i> Créer une classe
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
