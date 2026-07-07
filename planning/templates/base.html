@@ -74,8 +74,11 @@
                     <a class="nav-link {% if 'salle' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'salle_list' %}">
                         <i class="fas fa-door-open"></i> Salles
                     </a>
-                    <a class="nav-link {% if 'planning' in request.resolver_match.url_name %}active{% endif %}" href="{% url 'planning_list' %}">
+                    <a class="nav-link {% if 'planning' in request.resolver_match.url_name and request.resolver_match.url_name != 'planning_calendar' %}active{% endif %}" href="{% url 'planning_list' %}">
                         <i class="fas fa-calendar-alt"></i> Planning
+                    </a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'planning_calendar' %}active{% endif %}" href="{% url 'planning_calendar' %}">
+                        <i class="fas fa-calendar-week"></i> Calendrier
                     </a>
                 </nav>
             </div>

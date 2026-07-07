@@ -32,8 +32,14 @@
                                 <td>{{ classe.niveau }}</td>
                                 <td>{{ classe.nombre_etudiants }}</td>
                                 <td>
-                                    <a href="{% url 'classe_update' classe.pk %}" class="btn btn-sm btn-outline-warning">
+                                    <a href="{% url 'classe_detail' classe.pk %}" class="btn btn-sm btn-outline-info" title="Détails">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{% url 'classe_update' classe.pk %}" class="btn btn-sm btn-outline-warning" title="Modifier">
                                         <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'classe_delete' classe.pk %}" class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                        <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

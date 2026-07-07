@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}Calendrier - Gestion Planning{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-calendar-alt"></i> Calendrier des plannings</h1>
+    <a href="{% url 'planning_create' %}" class="btn" style="background: purple; color: white;">
+        <i class="fas fa-plus"></i> Nouveau planning
+    </a>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a href="?week={{ week_offset|add:"-1" }}" class="btn btn-outline-secondary">
+        <i class="fas fa-chevron-left"></i> Semaine précédente
+    </a>
+    <h5 class="mb-0">Du {{ start_of_week|date:"d/m/Y" }} au {{ end_of_week|date:"d/m/Y" }}</h5>
+    <a href="?week={{ week_offset|add:"1" }}" class="btn btn-outline-secondary">
+        Semaine suivante <i class="fas fa-chevron-right"></i>
+    </a>
+</div>
+
+<div class="calendar-grid">
+    {% for jour in jours %}
+        <div class="calendar-day {% if jour.date == today %}calendar-today{% endif %}">
+            <div class="calendar-day-header">
+                {{ jour.date|date:"l" }}<br>
+                <small>{{ jour.date|date:"d/m" }}</small>
+            </div>
+            <div class="calendar-day-body">
+                {% for planning in jour.plannings %}
+                    <a href="{% url 'planning_detail' planning.pk %}" class="calendar-event">
+                        <div class="calendar-event-time">
+                            {{ planning.heure_debut|time:"H:i" }} - {{ planning.heure_fin|time:"H:i" }}
+                        </div>
+                        <div class="calendar-event-title">{{ planning.cours.nom }}</div>
+                        <div class="calendar-event-sub">
+                            {{ planning.classe.nom }} · {{ planning.salle.nom }}
+                        </div>
+                    </a>
+                {% empty %}
+                    <div class="calendar-empty">—</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    align-items: start;
+}
+.calendar-day {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.calendar-day-header {
+    background: purple;
+    color: #fff;
+    text-align: center;
+    padding: 8px 4px;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 0.9rem;
+}
+.calendar-today .calendar-day-header {
+    background: #6a0dad;
+    box-shadow: inset 0 0 0 2px #ffd700;
+}
+.calendar-day-body {
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+.calendar-event {
+    display: block;
+    background: #f3e8fd;
+    border-left: 4px solid purple;
+    border-radius: 4px;
+    padding: 6px 8px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.8rem;
+    transition: transform 0.1s ease;
+}
+.calendar-event:hover {
+    transform: scale(1.02);
+    background: #e9d5fb;
+    color: #333;
+}
+.calendar-event-time {
+    font-weight: 700;
+    color: purple;
+}
+.calendar-event-title {
+    font-weight: 600;
+}
+.calendar-event-sub {
+    color: #666;
+    font-size: 0.75rem;
+}
+.calendar-empty {
+    color: #bbb;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 10px 0;
+}
+@media (max-width: 768px) {
+    .calendar-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{% endblock %}

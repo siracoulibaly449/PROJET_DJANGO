@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-        {% if cours_list %}
+        {% if cours %}
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -26,16 +26,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for cours in cours_list %}
+                        {% for cours in cours %}
                             <tr>
                                 <td>{{ cours.nom }}</td>
                                 <td><span class="badge bg-secondary">{{ cours.code }}</span></td>
                                 <td>{{ cours.filiere.nom }}</td>
-                                <td>{{ cours.professeur.nom }}</td>
+                                <td>{{ cours.professeur }}</td>
                                 <td>{{ cours.heures_total }}</td>
                                 <td>
-                                    <a href="{% url 'cours_update' cours.pk %}" class="btn btn-sm btn-outline-warning">
+                                    <a href="{% url 'cours_detail' cours.pk %}" class="btn btn-sm btn-outline-info" title="Détails">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{% url 'cours_update' cours.pk %}" class="btn btn-sm btn-outline-warning" title="Modifier">
                                         <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'cours_delete' cours.pk %}" class="btn btn-sm btn-outline-danger" title="Supprimer">
+                                        <i class="fas fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

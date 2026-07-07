@@ -21,35 +21,51 @@
 
 <!-- Statistiques rapides -->
 <div class="row mb-4">
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card stat-card text-white">
             <div class="card-body text-center">
-                <h2 class="card-title">24</h2>
-                <p class="card-text">Événements ce mois</p>
+                <h2 class="card-title">{{ total_filieres }}</h2>
+                <p class="card-text">Filières</p>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card stat-card text-white">
             <div class="card-body text-center">
-                <h2 class="card-title">8</h2>
-                <p class="card-text">Tâches en cours</p>
+                <h2 class="card-title">{{ total_classes }}</h2>
+                <p class="card-text">Classes</p>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card stat-card text-white">
             <div class="card-body text-center">
-                <h2 class="card-title">3</h2>
-                <p class="card-text">Réunions aujourd'hui</p>
+                <h2 class="card-title">{{ total_cours }}</h2>
+                <p class="card-text">Cours</p>
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <div class="card stat-card text-white">
             <div class="card-body text-center">
-                <h2 class="card-title">95%</h2>
-                <p class="card-text">Taux de completion</p>
+                <h2 class="card-title">{{ total_salles }}</h2>
+                <p class="card-text">Salles</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card text-white">
+            <div class="card-body text-center">
+                <h2 class="card-title">{{ plannings_aujourdhui }}</h2>
+                <p class="card-text">Aujourd'hui</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="card stat-card text-white">
+            <div class="card-body text-center">
+                <h2 class="card-title">{{ plannings_semaine }}</h2>
+                <p class="card-text">Cette semaine</p>
             </div>
         </div>
     </div>
